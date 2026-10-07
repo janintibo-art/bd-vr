@@ -10,6 +10,7 @@ permissions:
 
 env:
   GODOT_VERSION: 4.7.2
+  OPENXR_VENDORS_VERSION: 5.1.0-stable
   JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
   ANDROID_HOME: /usr/lib/android-sdk
 
@@ -51,17 +52,32 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates"
           mv "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
 
+      - name: Install OpenXR Vendors plugin
+        run: |
+          curl -L --fail --retry 3 \
+            -o /tmp/godotopenxrvendorsaddon.zip \
+            "https://github.com/GodotVR/godot_openxr_vendors/releases/download/${OPENXR_VENDORS_VERSION}/godotopenxrvendorsaddon.zip"
+          rm -rf /tmp/godotopenxrvendors
+          mkdir -p /tmp/godotopenxrvendors
+          unzip -q -o /tmp/godotopenxrvendorsaddon.zip -d /tmp/godotopenxrvendors
+          mkdir -p addons
+          rm -rf addons/godotopenxrvendors
+          mv /tmp/godotopenxrvendors/asset/addons/godotopenxrvendors addons/godotopenxrvendors
+          test -d addons/godotopenxrvendors
+
       - name: Import project
         run: godot --headless --editor --quit --path .
 
       - name: Build debug APK for Quest 3
         run: |
           mkdir -p build
-          godot --headless --verbose --path . --export-debug "Quest 3" build/bd-vr.apk
+          godot --headless --verbose --path . \
+            --install-android-build-template \
+            --export-debug "Quest 3" build/bd-vr.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: bd-vr-quest3-v5
+          name: bd-vr-quest3-v6
           path: build/bd-vr.apk
           if-no-files-found: error
