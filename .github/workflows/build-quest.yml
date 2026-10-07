@@ -1,0 +1,43 @@
+name: Build Quest APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  build:
+    name: Quest 3 APK
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.7.2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install export templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Import project
+        run: godot --headless --editor --quit --path .
+
+      - name: Build debug APK for Quest 3
+        run: |
+          mkdir -p build
+          godot --headless --verbose --path . --export-debug "Quest 3" build/bd-vr.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: bd-vr-quest3-v1
+          path: build/bd-vr.apk
+          if-no-files-found: error

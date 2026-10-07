@@ -1,0 +1,94 @@
+[gd_resource type="OpenXRActionMap" format=3]
+
+[sub_resource type="OpenXRAction" id="trigger_click"]
+resource_name = "trigger_click"
+localized_name = "Trigger click"
+action_type = 0
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="primary"]
+resource_name = "primary"
+localized_name = "Primary thumbstick"
+action_type = 2
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="ax_button"]
+resource_name = "ax_button"
+localized_name = "A / X button"
+action_type = 0
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="by_button"]
+resource_name = "by_button"
+localized_name = "B / Y button"
+action_type = 0
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="menu_button"]
+resource_name = "menu_button"
+localized_name = "Menu button"
+action_type = 0
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="aim_pose"]
+resource_name = "aim_pose"
+localized_name = "Aim pose"
+action_type = 3
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRActionSet" id="action_set"]
+resource_name = "godot"
+localized_name = "BD VR controls"
+actions = [SubResource("trigger_click"), SubResource("primary"), SubResource("ax_button"), SubResource("by_button"), SubResource("menu_button"), SubResource("aim_pose")]
+
+[sub_resource type="OpenXRIPBinding" id="aim_left"]
+action = SubResource("aim_pose")
+binding_path = "/user/hand/left/input/aim/pose"
+
+[sub_resource type="OpenXRIPBinding" id="aim_right"]
+action = SubResource("aim_pose")
+binding_path = "/user/hand/right/input/aim/pose"
+
+[sub_resource type="OpenXRIPBinding" id="trigger_left"]
+action = SubResource("trigger_click")
+binding_path = "/user/hand/left/input/trigger/value"
+
+[sub_resource type="OpenXRIPBinding" id="trigger_right"]
+action = SubResource("trigger_click")
+binding_path = "/user/hand/right/input/trigger/value"
+
+[sub_resource type="OpenXRIPBinding" id="stick_left"]
+action = SubResource("primary")
+binding_path = "/user/hand/left/input/thumbstick"
+
+[sub_resource type="OpenXRIPBinding" id="stick_right"]
+action = SubResource("primary")
+binding_path = "/user/hand/right/input/thumbstick"
+
+[sub_resource type="OpenXRIPBinding" id="ax_left"]
+action = SubResource("ax_button")
+binding_path = "/user/hand/left/input/x/click"
+
+[sub_resource type="OpenXRIPBinding" id="ax_right"]
+action = SubResource("ax_button")
+binding_path = "/user/hand/right/input/a/click"
+
+[sub_resource type="OpenXRIPBinding" id="by_left"]
+action = SubResource("by_button")
+binding_path = "/user/hand/left/input/y/click"
+
+[sub_resource type="OpenXRIPBinding" id="by_right"]
+action = SubResource("by_button")
+binding_path = "/user/hand/right/input/b/click"
+
+[sub_resource type="OpenXRIPBinding" id="menu_left"]
+action = SubResource("menu_button")
+binding_path = "/user/hand/left/input/menu/click"
+
+[sub_resource type="OpenXRInteractionProfile" id="oculus_touch"]
+interaction_profile_path = "/interaction_profiles/oculus/touch_controller"
+bindings = [SubResource("aim_left"), SubResource("aim_right"), SubResource("trigger_left"), SubResource("trigger_right"), SubResource("stick_left"), SubResource("stick_right"), SubResource("ax_left"), SubResource("ax_right"), SubResource("by_left"), SubResource("by_right"), SubResource("menu_left")]
+
+[resource]
+action_sets = [SubResource("action_set")]
+interaction_profiles = [SubResource("oculus_touch")]

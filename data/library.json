@@ -1,0 +1,54 @@
+[
+  {
+    "id": "silo",
+    "title": "SILO",
+    "subtitle": "Thriller / science-fiction",
+    "cover": "res://assets/covers/silo.jpg",
+    "preview_pages": [
+      "res://assets/previews/silo/1.jpg",
+      "res://assets/previews/silo/2.jpg",
+      "res://assets/previews/silo/3.jpg"
+    ],
+    "page_count": 20,
+    "source_hint": "Silo.zip"
+  },
+  {
+    "id": "artheus",
+    "title": "ARTHÉUS",
+    "subtitle": "L'Élu Malgré Lui",
+    "cover": "res://assets/covers/artheus.jpg",
+    "preview_pages": [
+      "res://assets/previews/artheus/1.jpg",
+      "res://assets/previews/artheus/2.jpg",
+      "res://assets/previews/artheus/3.jpg"
+    ],
+    "page_count": 38,
+    "source_hint": "Arthéus, l’Élu Malgré Lui.zip"
+  },
+  {
+    "id": "enquete",
+    "title": "ENQUÊTE",
+    "subtitle": "Les Puces / Catacombes",
+    "cover": "res://assets/covers/enquete.jpg",
+    "preview_pages": [
+      "res://assets/previews/enquete/1.jpg",
+      "res://assets/previews/enquete/2.jpg",
+      "res://assets/previews/enquete/3.jpg"
+    ],
+    "page_count": 12,
+    "source_hint": "Enquête.zip"
+  },
+  {
+    "id": "isekai",
+    "title": "ISEKAI",
+    "subtitle": "Tome 1",
+    "cover": "res://assets/covers/isekai.jpg",
+    "preview_pages": [
+      "res://assets/previews/isekai/1.jpg",
+      "res://assets/previews/isekai/2.jpg",
+      "res://assets/previews/isekai/3.jpg"
+    ],
+    "page_count": 15,
+    "source_hint": "Isekai.zip"
+  }
+]
