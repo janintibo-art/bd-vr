@@ -65,7 +65,9 @@ jobs:
           mkdir -p addons
           rm -rf addons/godotopenxrvendors
           mv /tmp/godotopenxrvendors/asset/addons/godotopenxrvendors addons/godotopenxrvendors
-          test -f addons/godotopenxrvendors/plugin.cfg
+          echo "OpenXR Vendors files:"
+          find addons/godotopenxrvendors -maxdepth 2 -type f | head -40
+          test -f addons/godotopenxrvendors/plugin.gdextension
 
       - name: Import project
         run: godot --headless --editor --quit --path .
@@ -80,6 +82,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: bd-vr-quest3-v7
+          name: bd-vr-quest3-v8
           path: build/bd-vr.apk
           if-no-files-found: error
