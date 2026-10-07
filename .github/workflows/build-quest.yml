@@ -54,6 +54,8 @@ jobs:
 
       - name: Install OpenXR Vendors plugin
         run: |
+          apt-get update
+          apt-get install -y --no-install-recommends curl unzip ca-certificates
           curl -L --fail --retry 3 \
             -o /tmp/godotopenxrvendorsaddon.zip \
             "https://github.com/GodotVR/godot_openxr_vendors/releases/download/${OPENXR_VENDORS_VERSION}/godotopenxrvendorsaddon.zip"
@@ -63,7 +65,7 @@ jobs:
           mkdir -p addons
           rm -rf addons/godotopenxrvendors
           mv /tmp/godotopenxrvendors/asset/addons/godotopenxrvendors addons/godotopenxrvendors
-          test -d addons/godotopenxrvendors
+          test -f addons/godotopenxrvendors/plugin.cfg
 
       - name: Import project
         run: godot --headless --editor --quit --path .
@@ -78,6 +80,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: bd-vr-quest3-v6
+          name: bd-vr-quest3-v7
           path: build/bd-vr.apk
           if-no-files-found: error
